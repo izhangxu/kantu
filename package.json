@@ -1,0 +1,18 @@
+{
+  "name": "kantu",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react": "15.3.2",
+    "react-native": "^0.33.0",
+    "react-native-button": "^1.7.0",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-material-design-searchbar": "^1.0.10",
+    "react-native-swiper": "^1.4.11",
+    "react-native-tab-navigator": "^0.3.3",
+    "react-swipeable-views": "^0.7.8"
+  }
+}

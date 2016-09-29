@@ -1,0 +1,86 @@
+import React, { Component } from 'react';
+import {
+    AppRegistry,
+    Dimensions,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    View,
+    Platform,
+    BackAndroid,
+    Image
+} from 'react-native';
+import Camera from 'react-native-camera';
+
+export default class CameraView extends Component {
+    constructor (props){
+        super(props);
+        this.state = {};
+        this.onBackAndroid = this.onBackAndroid.bind(this);
+    }
+
+    componentWillMount() {
+        if (Platform.OS === 'android') {
+            BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+        }
+    }
+
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
+        }
+    }
+
+    onBackAndroid () {
+        const nav = this.props.navigator;
+        const routers = nav.getCurrentRoutes();
+        if (routers.length > 1) {
+            nav.pop();
+            return true;
+        }
+        return false;
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Camera
+                    ref={(cam) => {
+                        this.camera = cam;
+                    }}
+                    style={styles.preview}
+                    aspect={Camera.constants.Aspect.fill}>
+                    <Text style={styles.capture} onPress={this.takePicture.bind(this)}>
+                        <Image source={require('../../images/capture.png')} style={{width: 60, height: 60}}/>
+                    </Text>
+                </Camera>
+            </View>
+        );
+    }
+
+    takePicture() {
+        this.camera.capture()
+            .then((data) => console.log(data))
+            .catch(err => console.error(err));
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width
+    },
+    capture: {
+        flex: 0,
+        borderRadius: 5,
+        color: '#000',
+        padding: 10,
+        margin: 40
+    }
+});

@@ -31,7 +31,7 @@ export default class Header extends Component {
 					<LeftIcon/>
 					<Text style={styles.fontFFF}>{obj.backName}</Text>
 				</TouchableOpacity>
-				<View style={[styles.title, styles.center]}>
+				<View style={[styles.title]}>
 					<Text style={[styles.fontFFF, styles.titlePos]} numberOfLines={1}>{obj.title}</Text>
 				</View>
 			</View>
@@ -57,11 +57,12 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
 	},
 	title: {
-		flex: 1
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'flex-end'
 	},
 	titlePos: {
-		marginLeft: -20,
-		width: 200
+		marginRight: 20	
 	},
 	center: {
 		justifyContent: 'center',
